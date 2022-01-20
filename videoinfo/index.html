@@ -1,0 +1,39 @@
+<head>
+</head>
+<body>
+    <h1>Video Info</h1>
+    <form>
+        <div>
+            <label>Select a video!</label>
+            <input type="file" accept="video/*" />
+        </div>
+        <button type="submit">Get Info</button>
+    </form>
+
+    <h1 id="result"></h1>
+
+    <script>
+        // const electron = require('electron');
+        // const { ipcRenderer } = electron;
+
+        window.api.receive('video:metadata', (duration) => {
+            console.log("received: ", duration);
+            var seconds = duration;
+            let hours = Math.floor(seconds / 3600);
+            seconds = seconds % 3600;
+            let minutes = Math.floor(seconds / 60);
+            seconds = (seconds % 60).toPrecision(3);
+            document.querySelector('#result').innerHTML = `Video is ${hours} h ${minutes} m  ${seconds} s`;
+        });
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            // debugger
+            const { path } = document.querySelector('input').files[0];
+
+            window.api.send('video:submit', path);
+        });
+
+        
+    </script>
+</body>
