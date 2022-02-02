@@ -3,4 +3,14 @@
 </head>
 <body>
     <h1>My Todos</h1>
+    <ul></ul>
+    <script>
+        window.api.receive('todo:add', (todo) => {
+            const li = document.createElement('li');
+            const text = document.createTextNode(todo);
+            li.appendChild(text);
+            document.querySelector('ul').appendChild(li);
+            console.log(todo);
+        });
+    </script>
 </body>
