@@ -5,12 +5,17 @@
     <h1>My Todos</h1>
     <ul></ul>
     <script>
+        const list = document.querySelector('ul');
+
         window.api.receive('todo:add', (todo) => {
             const li = document.createElement('li');
             const text = document.createTextNode(todo);
             li.appendChild(text);
-            document.querySelector('ul').appendChild(li);
+            list.appendChild(li);
             console.log(todo);
         });
+        window.api.receive("todo:clear", () => {
+            list.innerHTML = "";
+        })
     </script>
 </body>
