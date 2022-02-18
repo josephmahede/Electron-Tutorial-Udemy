@@ -28,7 +28,7 @@ class TimerTray extends Tray {
         }
     }
 
-    onRightClick(event) {
+    onRightClick() {
         const menuConfig = Menu.buildFromTemplate([
             {
                 label: 'Quit',

@@ -7,13 +7,22 @@ let mainWindow;
 let tray
 
 app.on('ready', () => {
+    
     mainWindow = new BrowserWindow({
         height: 500,
         width: 300,
         frame: false,
         resizable: false,
-        show: false
+        show: false,
+        skipTaskBar: true
     });
+
+    if (process.platform == 'darwin') {
+        app.dock.hide();
+    } else {
+        mainWindow.setSkipTaskbar(true);
+    }
+
     mainWindow.loadURL(`file://${__dirname}\\src\\index.html`);
     mainWindow.on('blur', () => {
         mainWindow.hide();
