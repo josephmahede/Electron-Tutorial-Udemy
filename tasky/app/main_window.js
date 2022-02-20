@@ -9,7 +9,10 @@ class MainWindow extends BrowserWindow {
             frame: false,
             resizable: false,
             show: false,
-            skipTaskBar: true
+            skipTaskBar: true,
+            webPreferences: {
+                backgroundThrottling: false
+            }
         });
         this.loadURL(url);
         this.on('blur', this.onBlur.bind(this));
